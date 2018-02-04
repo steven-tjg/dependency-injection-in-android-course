@@ -2,6 +2,7 @@ package com.techyourchance.journeytodependencyinjection.screens.common.activitie
 
 import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 
 import com.techyourchance.journeytodependencyinjection.MyApplication;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.CompositionRoot;
@@ -16,7 +17,8 @@ public class BaseActivity extends AppCompatActivity {
         if (mPresentationCompositionRoot == null) {
             mPresentationCompositionRoot = new PresentationCompositionRoot(
                     getAppCompositionRoot(),
-                    getSupportFragmentManager()
+                    getSupportFragmentManager(),
+                    LayoutInflater.from(this)
             );
         }
 
