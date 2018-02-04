@@ -35,7 +35,7 @@
 
          mFetchQuestionsListUseCase = getCompositionRoot().getFetchQuestionsListUseCase();
 
-         mDialogsManager = new DialogsManager(getSupportFragmentManager());
+         mDialogsManager = getCompositionRoot().getDialogsManager(getSupportFragmentManager());
 
      }
 
