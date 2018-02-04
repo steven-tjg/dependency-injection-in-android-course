@@ -3,13 +3,13 @@
  import android.content.Context;
  import android.content.Intent;
  import android.os.Bundle;
- import android.support.v4.app.FragmentManager;
  import android.support.v7.app.AppCompatActivity;
  import android.view.LayoutInflater;
 
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.QuestionWithBody;
- import com.techyourchance.journeytodependencyinjection.screens.common.ServerErrorDialogFragment;
+ import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
+ import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.ServerErrorDialogFragment;
 
  public class QuestionDetailsActivity extends AppCompatActivity implements
          QuestionDetailsViewMvc.Listener, FetchQuestionDetailsUseCase.Listener {
@@ -28,6 +28,8 @@
 
      private FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
 
+     private DialogsManager mDialogsManager;
+
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
@@ -41,6 +43,7 @@
          //noinspection ConstantConditions
          mQuestionId = getIntent().getExtras().getString(EXTRA_QUESTION_ID);
 
+         mDialogsManager = new DialogsManager(getSupportFragmentManager());
      }
 
      @Override
@@ -66,10 +69,6 @@
 
      @Override
      public void onFetchOfQuestionDetailsFailed() {
-         FragmentManager fragmentManager = getSupportFragmentManager();
-         fragmentManager.beginTransaction()
-                 .add(ServerErrorDialogFragment.newInstance(), null)
-                 .commitAllowingStateLoss();
-
+         mDialogsManager.showRetainedDialogWithId(ServerErrorDialogFragment.newInstance(), "");
      }
  }

@@ -1,4 +1,4 @@
-package com.techyourchance.journeytodependencyinjection.screens.common;
+package com.techyourchance.journeytodependencyinjection.screens.common.dialogs;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
