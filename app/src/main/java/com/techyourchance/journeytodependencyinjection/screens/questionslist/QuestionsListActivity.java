@@ -8,9 +8,12 @@
  import com.techyourchance.journeytodependencyinjection.Constants;
  import com.techyourchance.journeytodependencyinjection.networking.QuestionsListResponseSchema;
  import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
+ import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
  import com.techyourchance.journeytodependencyinjection.screens.common.ServerErrorDialogFragment;
  import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsActivity;
+
+ import java.util.List;
 
  import retrofit2.Call;
  import retrofit2.Callback;
@@ -19,11 +22,11 @@
  import retrofit2.converter.gson.GsonConverterFactory;
 
  public class QuestionsListActivity extends AppCompatActivity implements
-         Callback<QuestionsListResponseSchema>,QuestionsListViewMvc.Listener {
+         QuestionsListViewMvc.Listener, FetchQuestionsListUseCase.Listener {
 
-     private StackoverflowApi mStackoverflowApi;
+     private static final int NUM_OF_QUESTIONS_TO_FETCH = 20;
 
-     private Call<QuestionsListResponseSchema> mCall;
+     private FetchQuestionsListUseCase mFetchQuestionsListUseCase;
 
      private QuestionsListViewMvc mViewMvc;
 
@@ -35,44 +38,33 @@
 
          setContentView(mViewMvc.getRootView());
 
-         // init retrofit
-         Retrofit retrofit = new Retrofit.Builder()
-                 .baseUrl(Constants.BASE_URL)
-                 .addConverterFactory(GsonConverterFactory.create())
-                 .build();
+         mFetchQuestionsListUseCase = new FetchQuestionsListUseCase();
 
-         mStackoverflowApi = retrofit.create(StackoverflowApi.class);
      }
 
      @Override
      protected void onStart() {
          super.onStart();
          mViewMvc.registerListener(this);
-         mCall = mStackoverflowApi.lastActiveQuestions(20);
-         mCall.enqueue(this);
+         mFetchQuestionsListUseCase.registerListener(this);
+
+         mFetchQuestionsListUseCase.fetchLastActiveQuestionsAndNotify(NUM_OF_QUESTIONS_TO_FETCH);
      }
 
      @Override
      protected void onStop() {
          super.onStop();
          mViewMvc.unregisterListener(this);
-         if (mCall != null) {
-             mCall.cancel();
-         }
+         mFetchQuestionsListUseCase.unregisterListener(this);
      }
 
      @Override
-     public void onResponse(Call<QuestionsListResponseSchema> call, Response<QuestionsListResponseSchema> response) {
-         QuestionsListResponseSchema responseSchema;
-         if (response.isSuccessful() && (responseSchema = response.body()) != null) {
-             mViewMvc.bindQuestions(responseSchema.getQuestions());
-         } else {
-             onFailure(call, null);
-         }
+     public void onFetchOfQuestionsSucceeded(List<Question> questions) {
+         mViewMvc.bindQuestions(questions);
      }
 
      @Override
-     public void onFailure(Call<QuestionsListResponseSchema> call, Throwable t) {
+     public void onFetchOfQuestionsFailed() {
          FragmentManager fragmentManager = getSupportFragmentManager();
          fragmentManager.beginTransaction()
                  .add(ServerErrorDialogFragment.newInstance(), null)
