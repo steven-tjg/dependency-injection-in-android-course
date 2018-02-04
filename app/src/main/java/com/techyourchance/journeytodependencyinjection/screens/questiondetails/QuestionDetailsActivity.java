@@ -7,7 +7,6 @@
  import android.view.LayoutInflater;
 
  import com.techyourchance.journeytodependencyinjection.MyApplication;
- import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.QuestionWithBody;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
@@ -40,9 +39,7 @@
 
          setContentView(mViewMvc.getRootView());
 
-         StackoverflowApi stackoverflowApi = ((MyApplication) getApplication()).getStackoverflowApi();
-
-         mFetchQuestionDetailsUseCase = new FetchQuestionDetailsUseCase(stackoverflowApi);
+         mFetchQuestionDetailsUseCase = ((MyApplication) getApplication()).getFetchQuestionDetailsUseCase();
 
          //noinspection ConstantConditions
          mQuestionId = getIntent().getExtras().getString(EXTRA_QUESTION_ID);
