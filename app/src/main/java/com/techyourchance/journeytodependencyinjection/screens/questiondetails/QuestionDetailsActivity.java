@@ -4,6 +4,7 @@
  import android.content.Intent;
  import android.os.Bundle;
 
+ import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.Service;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.QuestionDetails;
  import com.techyourchance.journeytodependencyinjection.screens.common.activities.BaseActivity;
@@ -22,9 +23,9 @@
          context.startActivity(intent);
      }
 
-     public FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
-     public DialogsManager mDialogsManager;
-     public ViewMvcFactory mViewMvcFactory;
+     @Service private FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
+     @Service private DialogsManager mDialogsManager;
+     @Service private ViewMvcFactory mViewMvcFactory;
 
      private String mQuestionId;
 

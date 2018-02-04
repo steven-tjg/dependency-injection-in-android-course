@@ -2,6 +2,7 @@
 
  import android.os.Bundle;
 
+ import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.Service;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
  import com.techyourchance.journeytodependencyinjection.screens.common.activities.BaseActivity;
@@ -17,9 +18,9 @@
 
      private static final int NUM_OF_QUESTIONS_TO_FETCH = 20;
 
-     public FetchQuestionsListUseCase mFetchQuestionsListUseCase;
-     public DialogsManager mDialogsManager;
-     public ViewMvcFactory mViewMvcFactory;
+     @Service private FetchQuestionsListUseCase mFetchQuestionsListUseCase;
+     @Service private DialogsManager mDialogsManager;
+     @Service private ViewMvcFactory mViewMvcFactory;
 
      private QuestionsListViewMvc mViewMvc;
 
