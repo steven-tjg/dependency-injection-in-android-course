@@ -1,11 +1,11 @@
  package com.techyourchance.journeytodependencyinjection.screens.questionslist;
 
  import android.os.Bundle;
- import android.support.v4.app.FragmentManager;
  import android.support.v7.app.AppCompatActivity;
  import android.view.LayoutInflater;
 
  import com.techyourchance.journeytodependencyinjection.MyApplication;
+ import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
@@ -13,8 +13,6 @@
  import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsActivity;
 
  import java.util.List;
-
- import retrofit2.Retrofit;
 
  public class QuestionsListActivity extends AppCompatActivity implements
          QuestionsListViewMvc.Listener, FetchQuestionsListUseCase.Listener {
@@ -35,9 +33,9 @@
 
          setContentView(mViewMvc.getRootView());
 
-         Retrofit retrofit = ((MyApplication) getApplication()).getRetrofit();
+         StackoverflowApi stackoverflowApi = ((MyApplication) getApplication()).getStackoverflowApi();
 
-         mFetchQuestionsListUseCase = new FetchQuestionsListUseCase(retrofit);
+         mFetchQuestionsListUseCase = new FetchQuestionsListUseCase(stackoverflowApi);
 
          mDialogsManager = new DialogsManager(getSupportFragmentManager());
 

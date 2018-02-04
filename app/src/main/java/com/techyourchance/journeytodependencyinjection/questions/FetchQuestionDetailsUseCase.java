@@ -28,8 +28,8 @@ public class FetchQuestionDetailsUseCase extends BaseObservable<FetchQuestionDet
 
     @Nullable Call<SingleQuestionResponseSchema> mCall;
 
-    public FetchQuestionDetailsUseCase(Retrofit retrofit) {
-        mStackoverflowApi = retrofit.create(StackoverflowApi.class);
+    public FetchQuestionDetailsUseCase(StackoverflowApi stackoverflowApi) {
+        mStackoverflowApi = stackoverflowApi;
     }
 
     public void fetchQuestionDetailsAndNotify(String questionId) {
