@@ -2,19 +2,18 @@ package com.techyourchance.journeytodependencyinjection.questions;
 
 import android.support.annotation.Nullable;
 
-import com.techyourchance.journeytodependencyinjection.Constants;
 import com.techyourchance.journeytodependencyinjection.common.BaseObservable;
+import com.techyourchance.journeytodependencyinjection.networking.QuestionSchema;
 import com.techyourchance.journeytodependencyinjection.networking.QuestionsListResponseSchema;
 import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class FetchQuestionsListUseCase extends BaseObservable<FetchQuestionsListUseCase.Listener> {
 
@@ -40,7 +39,7 @@ public class FetchQuestionsListUseCase extends BaseObservable<FetchQuestionsList
             @Override
             public void onResponse(Call<QuestionsListResponseSchema> call, Response<QuestionsListResponseSchema> response) {
                 if (response.isSuccessful()) {
-                    notifySucceeded(response.body().getQuestions());
+                    notifySucceeded(questionsFromQuestionsSchemas(response.body().getQuestions()));
                 } else {
                     notifyFailed();
                 }
@@ -51,6 +50,14 @@ public class FetchQuestionsListUseCase extends BaseObservable<FetchQuestionsList
                 notifyFailed();
             }
         });
+    }
+
+    private List<Question> questionsFromQuestionsSchemas(List<QuestionSchema> questionSchemas) {
+        List<Question> questions = new ArrayList<>(questionSchemas.size());
+        for (QuestionSchema questionSchema : questionSchemas) {
+            questions.add(new Question(questionSchema.getId(), questionSchema.getTitle()));
+        }
+        return questions;
     }
 
     private void cancelCurrentFetchIfActive() {
