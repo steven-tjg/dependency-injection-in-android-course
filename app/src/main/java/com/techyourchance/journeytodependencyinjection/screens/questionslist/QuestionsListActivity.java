@@ -7,13 +7,14 @@
  import com.techyourchance.journeytodependencyinjection.MyApplication;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
+ import com.techyourchance.journeytodependencyinjection.screens.common.activities.BaseActivity;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.ServerErrorDialogFragment;
  import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsActivity;
 
  import java.util.List;
 
- public class QuestionsListActivity extends AppCompatActivity implements
+ public class QuestionsListActivity extends BaseActivity implements
          QuestionsListViewMvc.Listener, FetchQuestionsListUseCase.Listener {
 
      private static final int NUM_OF_QUESTIONS_TO_FETCH = 20;
@@ -32,7 +33,7 @@
 
          setContentView(mViewMvc.getRootView());
 
-         mFetchQuestionsListUseCase = ((MyApplication) getApplication()).getCompositionRoot().getFetchQuestionsListUseCase();
+         mFetchQuestionsListUseCase = getCompositionRoot().getFetchQuestionsListUseCase();
 
          mDialogsManager = new DialogsManager(getSupportFragmentManager());
 

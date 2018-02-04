@@ -9,10 +9,11 @@
  import com.techyourchance.journeytodependencyinjection.MyApplication;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.QuestionWithBody;
+ import com.techyourchance.journeytodependencyinjection.screens.common.activities.BaseActivity;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.ServerErrorDialogFragment;
 
- public class QuestionDetailsActivity extends AppCompatActivity implements
+ public class QuestionDetailsActivity extends BaseActivity implements
          QuestionDetailsViewMvc.Listener, FetchQuestionDetailsUseCase.Listener {
 
      public static final String EXTRA_QUESTION_ID = "EXTRA_QUESTION_ID";
@@ -39,7 +40,7 @@
 
          setContentView(mViewMvc.getRootView());
 
-         mFetchQuestionDetailsUseCase = ((MyApplication) getApplication()).getCompositionRoot().getFetchQuestionDetailsUseCase();
+         mFetchQuestionDetailsUseCase = getCompositionRoot().getFetchQuestionDetailsUseCase();
 
          //noinspection ConstantConditions
          mQuestionId = getIntent().getExtras().getString(EXTRA_QUESTION_ID);
