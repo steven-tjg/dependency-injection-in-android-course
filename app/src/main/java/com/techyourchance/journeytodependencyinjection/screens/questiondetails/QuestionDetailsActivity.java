@@ -45,7 +45,7 @@
          //noinspection ConstantConditions
          mQuestionId = getIntent().getExtras().getString(EXTRA_QUESTION_ID);
 
-         mDialogsManager = getCompositionRoot().getDialogsManagerFactory().newDialogsManager(getSupportFragmentManager());
+         mDialogsManager = getCompositionRoot().getDialogsManager();
      }
 
      @Override
