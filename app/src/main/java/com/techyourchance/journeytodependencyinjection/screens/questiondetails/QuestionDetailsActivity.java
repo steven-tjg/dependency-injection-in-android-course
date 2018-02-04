@@ -6,10 +6,13 @@
  import android.support.v7.app.AppCompatActivity;
  import android.view.LayoutInflater;
 
+ import com.techyourchance.journeytodependencyinjection.MyApplication;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.QuestionWithBody;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.ServerErrorDialogFragment;
+
+ import retrofit2.Retrofit;
 
  public class QuestionDetailsActivity extends AppCompatActivity implements
          QuestionDetailsViewMvc.Listener, FetchQuestionDetailsUseCase.Listener {
@@ -38,7 +41,9 @@
 
          setContentView(mViewMvc.getRootView());
 
-         mFetchQuestionDetailsUseCase = new FetchQuestionDetailsUseCase();
+         Retrofit retrofit = ((MyApplication) getApplication()).getRetrofit();
+
+         mFetchQuestionDetailsUseCase = new FetchQuestionDetailsUseCase(retrofit);
 
          //noinspection ConstantConditions
          mQuestionId = getIntent().getExtras().getString(EXTRA_QUESTION_ID);

@@ -5,6 +5,7 @@
  import android.support.v7.app.AppCompatActivity;
  import android.view.LayoutInflater;
 
+ import com.techyourchance.journeytodependencyinjection.MyApplication;
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
@@ -12,6 +13,8 @@
  import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsActivity;
 
  import java.util.List;
+
+ import retrofit2.Retrofit;
 
  public class QuestionsListActivity extends AppCompatActivity implements
          QuestionsListViewMvc.Listener, FetchQuestionsListUseCase.Listener {
@@ -32,7 +35,9 @@
 
          setContentView(mViewMvc.getRootView());
 
-         mFetchQuestionsListUseCase = new FetchQuestionsListUseCase();
+         Retrofit retrofit = ((MyApplication) getApplication()).getRetrofit();
+
+         mFetchQuestionsListUseCase = new FetchQuestionsListUseCase(retrofit);
 
          mDialogsManager = new DialogsManager(getSupportFragmentManager());
 
