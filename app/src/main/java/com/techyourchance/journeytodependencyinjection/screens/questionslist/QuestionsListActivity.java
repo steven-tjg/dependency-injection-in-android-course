@@ -32,7 +32,7 @@
 
          setContentView(mViewMvc.getRootView());
 
-         mFetchQuestionsListUseCase = ((MyApplication) getApplication()).getFetchQuestionsListUseCase();
+         mFetchQuestionsListUseCase = ((MyApplication) getApplication()).getCompositionRoot().getFetchQuestionsListUseCase();
 
          mDialogsManager = new DialogsManager(getSupportFragmentManager());
 
