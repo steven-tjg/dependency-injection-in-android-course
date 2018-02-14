@@ -1,8 +1,8 @@
-package com.techyourchance.journeytodependencyinjection.common.dependencyinjection;
+package com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation;
 
 import android.app.Activity;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
@@ -12,46 +12,57 @@ import com.techyourchance.journeytodependencyinjection.screens.common.ImageLoade
 import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
 import com.techyourchance.journeytodependencyinjection.screens.common.mvcviews.ViewMvcFactory;
 
-public class PresentationCompositionRoot {
+import dagger.Module;
+import dagger.Provides;
 
+@Module
+public class PresentationModule {
+
+    private final FragmentActivity mActivity;
     private final ApplicationComponent mApplicationComponent;
-    private final AppCompatActivity mActivity;
 
-    public PresentationCompositionRoot(ApplicationComponent applicationComponent,
-                                       AppCompatActivity activity) {
+    public PresentationModule(FragmentActivity fragmentActivity, ApplicationComponent applicationComponent) {
+        mActivity = fragmentActivity;
         mApplicationComponent = applicationComponent;
-        mActivity = activity;
     }
 
-    private FragmentManager getFragmentManager() {
+    @Provides
+    FragmentManager getFragmentManager() {
         return mActivity.getSupportFragmentManager();
     }
 
-    private LayoutInflater getLayoutInflater() {
+    @Provides
+    LayoutInflater getLayoutInflater() {
         return LayoutInflater.from(mActivity);
     }
 
-    private Activity getActivity() {
+    @Provides
+    Activity getActivity() {
         return mActivity;
     }
 
-    public DialogsManager getDialogsManager() {
-        return new DialogsManager(getFragmentManager());
+    @Provides
+    DialogsManager getDialogsManager(FragmentManager fragmentManager) {
+        return new DialogsManager(fragmentManager);
     }
 
-    public FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase() {
+    @Provides
+    FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase() {
         return mApplicationComponent.getFetchQuestionDetailsUseCase();
     }
 
-    public FetchQuestionsListUseCase getFetchQuestionsListUseCase() {
+    @Provides
+    FetchQuestionsListUseCase getFetchQuestionsListUseCase() {
         return mApplicationComponent.getFetchQuestionsListUseCase();
     }
 
-    public ViewMvcFactory getViewMvcFactory() {
-        return new ViewMvcFactory(getLayoutInflater(), getImageLoader());
+    @Provides
+    ViewMvcFactory getViewMvcFactory(LayoutInflater inflater, ImageLoader imageLoader) {
+        return new ViewMvcFactory(inflater, imageLoader);
     }
 
-    private ImageLoader getImageLoader() {
-        return new ImageLoader(getActivity());
+    @Provides
+    ImageLoader getImageLoader(Activity activity) {
+        return new ImageLoader(activity);
     }
 }

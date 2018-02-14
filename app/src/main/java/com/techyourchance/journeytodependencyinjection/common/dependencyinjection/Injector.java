@@ -1,5 +1,6 @@
 package com.techyourchance.journeytodependencyinjection.common.dependencyinjection;
 
+import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationComponent;
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
 import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
@@ -7,14 +8,13 @@ import com.techyourchance.journeytodependencyinjection.screens.common.mvcviews.V
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.lang.reflect.Modifier;
 
 public class Injector {
 
-    private final PresentationCompositionRoot mPresentationCompositionRoot;
+    private final PresentationComponent mPresentationComponent;
 
-    public Injector(PresentationCompositionRoot presentationCompositionRoot) {
-        mPresentationCompositionRoot = presentationCompositionRoot;
+    public Injector(PresentationComponent presentationComponent) {
+        mPresentationComponent = presentationComponent;
     }
 
     public void inject(Object client) {
@@ -54,16 +54,16 @@ public class Injector {
 
     private Object getServiceForClass(Class<?> type) {
         if (type.equals(DialogsManager.class)) {
-            return mPresentationCompositionRoot.getDialogsManager();
+            return mPresentationComponent.getDialogsManager();
         }
         else if (type.equals(ViewMvcFactory.class)) {
-            return mPresentationCompositionRoot.getViewMvcFactory();
+            return mPresentationComponent.getViewMvcFactory();
         }
         else if (type.equals(FetchQuestionsListUseCase.class)) {
-            return mPresentationCompositionRoot.getFetchQuestionsListUseCase();
+            return mPresentationComponent.getFetchQuestionsListUseCase();
         }
         else if (type.equals(FetchQuestionDetailsUseCase.class)) {
-            return mPresentationCompositionRoot.getFetchQuestionDetailsUseCase();
+            return mPresentationComponent.getFetchQuestionDetailsUseCase();
         }
         else {
             throw new RuntimeException("unsupported service type class: " + type);
