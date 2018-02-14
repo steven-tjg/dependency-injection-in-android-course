@@ -4,9 +4,9 @@ import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 
 import com.techyourchance.journeytodependencyinjection.MyApplication;
-import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.CompositionRoot;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.Injector;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.PresentationCompositionRoot;
+import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
 
 public class BaseActivity extends AppCompatActivity {
 
@@ -22,10 +22,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private PresentationCompositionRoot getCompositionRoot() {
-        return new PresentationCompositionRoot(getAppCompositionRoot(),this);
+        return new PresentationCompositionRoot(getApplicationComponent(),this);
     }
 
-    private CompositionRoot getAppCompositionRoot() {
-        return ((MyApplication) getApplication()).getCompositionRoot();
+    private ApplicationComponent getApplicationComponent() {
+        return ((MyApplication) getApplication()).getApplicationComponent();
     }
 }
