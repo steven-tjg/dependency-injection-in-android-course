@@ -1,6 +1,7 @@
 package com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation;
 
 import android.app.Activity;
+import android.content.Context;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -37,6 +38,11 @@ public class PresentationModule {
         return mActivity;
     }
 
+    @Provides
+    Context context(Activity activity) {
+        return activity;
+    }
+    
     @Provides
     FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase(StackoverflowApi stackoverflowApi) {
         return new FetchQuestionDetailsUseCase(stackoverflowApi);
