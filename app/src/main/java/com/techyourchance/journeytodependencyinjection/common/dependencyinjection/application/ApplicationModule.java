@@ -35,8 +35,4 @@ public class ApplicationModule {
         return new FetchQuestionsListUseCase(stackoverflowApi);
     }
 
-    @Provides
-    FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase(StackoverflowApi stackoverflowApi) {
-        return new FetchQuestionDetailsUseCase(stackoverflowApi);
-    }
 }
