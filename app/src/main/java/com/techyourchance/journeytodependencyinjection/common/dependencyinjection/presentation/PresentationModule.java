@@ -5,13 +5,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
-import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
 import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
-import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
 import com.techyourchance.journeytodependencyinjection.screens.common.ImageLoader;
 import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
-import com.techyourchance.journeytodependencyinjection.screens.common.mvcviews.ViewMvcFactory;
 
 import dagger.Module;
 import dagger.Provides;
@@ -39,7 +36,7 @@ public class PresentationModule {
     Activity getActivity() {
         return mActivity;
     }
-    
+
     @Provides
     FetchQuestionDetailsUseCase getFetchQuestionDetailsUseCase(StackoverflowApi stackoverflowApi) {
         return new FetchQuestionDetailsUseCase(stackoverflowApi);
@@ -48,12 +45,6 @@ public class PresentationModule {
     @Provides
     DialogsManager getDialogsManager(FragmentManager fragmentManager) {
         return new DialogsManager(fragmentManager);
-    }
-
-
-    @Provides
-    ViewMvcFactory getViewMvcFactory(LayoutInflater inflater, ImageLoader imageLoader) {
-        return new ViewMvcFactory(inflater, imageLoader);
     }
 
     @Provides
