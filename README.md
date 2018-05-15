@@ -1,3 +1,3 @@
-# dependency-injection-in-android-course
+# Dependency Injection in Android with Dagger 2
 
-Tutorial application for Depenendcy Injection in Android with Dagger 2 course.
+Tutorial application for my [course about Dependency Injection in Android](https://www.udemy.com/dependency-injection-in-android-with-dagger/?couponCode=GITHUB).
