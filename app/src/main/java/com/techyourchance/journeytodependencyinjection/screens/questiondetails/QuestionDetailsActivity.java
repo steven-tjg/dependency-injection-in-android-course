@@ -69,6 +69,6 @@
 
      @Override
      public void onFetchOfQuestionDetailsFailed() {
-         mDialogsManager.showRetainedDialogWithId(ServerErrorDialogFragment.newInstance(), "");
+         mDialogsManager.showDialogWithId(ServerErrorDialogFragment.newInstance(), "");
      }
  }
