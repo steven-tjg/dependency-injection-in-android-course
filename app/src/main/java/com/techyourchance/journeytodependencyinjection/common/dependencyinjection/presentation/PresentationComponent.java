@@ -5,7 +5,7 @@ import com.techyourchance.journeytodependencyinjection.screens.questionslist.Que
 
 import dagger.Subcomponent;
 
-@Subcomponent(modules = PresentationModule.class)
+@Subcomponent(modules = {PresentationModule.class, ViewModelModule.class})
 public interface PresentationComponent {
     void inject(QuestionsListActivity questionsListActivity);
     void inject(QuestionDetailsActivity questionDetailsActivity);

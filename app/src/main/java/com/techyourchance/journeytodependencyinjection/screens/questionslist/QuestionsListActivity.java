@@ -10,6 +10,7 @@
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.ServerErrorDialogFragment;
  import com.techyourchance.journeytodependencyinjection.screens.common.mvcviews.ViewMvcFactory;
+ import com.techyourchance.journeytodependencyinjection.screens.common.viewmodel.ViewModelFactory;
  import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsActivity;
 
  import java.util.List;
@@ -24,6 +25,7 @@
      @Inject FetchQuestionsListUseCase mFetchQuestionsListUseCase;
      @Inject DialogsManager mDialogsManager;
      @Inject ViewMvcFactory mViewMvcFactory;
+     @Inject ViewModelFactory mViewModelFactory;
 
      private QuestionsListViewMvc mViewMvc;
 
@@ -36,7 +38,8 @@
 
          mViewMvc = mViewMvcFactory.newInstance(QuestionsListViewMvc.class, null);
 
-         mQuestionsListViewModel = ViewModelProviders.of(this).get(QuestionsListViewModel.class);
+         mQuestionsListViewModel = ViewModelProviders.of(this, mViewModelFactory)
+                 .get(QuestionsListViewModel.class);
 
          setContentView(mViewMvc.getRootView());
 

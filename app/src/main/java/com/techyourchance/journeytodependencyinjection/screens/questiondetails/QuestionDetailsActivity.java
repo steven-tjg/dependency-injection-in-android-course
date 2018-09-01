@@ -1,5 +1,6 @@
  package com.techyourchance.journeytodependencyinjection.screens.questiondetails;
 
+ import android.arch.lifecycle.ViewModelProviders;
  import android.content.Context;
  import android.content.Intent;
  import android.os.Bundle;
@@ -10,11 +11,12 @@
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.ServerErrorDialogFragment;
  import com.techyourchance.journeytodependencyinjection.screens.common.mvcviews.ViewMvcFactory;
+ import com.techyourchance.journeytodependencyinjection.screens.common.viewmodel.ViewModelFactory;
 
  import javax.inject.Inject;
 
  public class QuestionDetailsActivity extends BaseActivity implements
-         QuestionDetailsViewMvc.Listener, FetchQuestionDetailsUseCase.Listener {
+         QuestionDetailsViewMvc.Listener, QuestionDetailsViewModel.Listener {
 
      public static final String EXTRA_QUESTION_ID = "EXTRA_QUESTION_ID";
 
@@ -24,13 +26,15 @@
          context.startActivity(intent);
      }
 
-     @Inject FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
      @Inject DialogsManager mDialogsManager;
      @Inject ViewMvcFactory mViewMvcFactory;
+     @Inject ViewModelFactory mViewModelFactory;
 
      private String mQuestionId;
 
      private QuestionDetailsViewMvc mViewMvc;
+
+     private QuestionDetailsViewModel mQuestionDetailsViewModel;
 
 
      @Override
@@ -39,6 +43,9 @@
          getPresentationComponent().inject(this);
 
          mViewMvc = mViewMvcFactory.newInstance(QuestionDetailsViewMvc.class, null);
+
+         mQuestionDetailsViewModel = ViewModelProviders.of(this, mViewModelFactory)
+                 .get(QuestionDetailsViewModel.class);
 
          setContentView(mViewMvc.getRootView());
 
@@ -50,25 +57,25 @@
      protected void onStart() {
          super.onStart();
          mViewMvc.registerListener(this);
-         mFetchQuestionDetailsUseCase.registerListener(this);
+         mQuestionDetailsViewModel.registerListener(this);
 
-         mFetchQuestionDetailsUseCase.fetchQuestionDetailsAndNotify(mQuestionId);
+         mQuestionDetailsViewModel.fetchQuestionDetailsAndNotify(mQuestionId);
      }
 
      @Override
      protected void onStop() {
          super.onStop();
          mViewMvc.unregisterListener(this);
-         mFetchQuestionDetailsUseCase.unregisterListener(this);
+         mQuestionDetailsViewModel.unregisterListener(this);
      }
 
      @Override
-     public void onFetchOfQuestionDetailsSucceeded(QuestionDetails question) {
-         mViewMvc.bindQuestion(question);
+     public void onQuestionDetailsFetched(QuestionDetails questionDetails) {
+         mViewMvc.bindQuestion(questionDetails);
      }
 
      @Override
-     public void onFetchOfQuestionDetailsFailed() {
+     public void onQuestionDetailsFetchFailed() {
          mDialogsManager.showDialogWithId(ServerErrorDialogFragment.newInstance(), "");
      }
  }
