@@ -1,6 +1,8 @@
  package com.techyourchance.journeytodependencyinjection.screens.questionslist;
 
+ import android.arch.lifecycle.ViewModelProviders;
  import android.os.Bundle;
+ import android.widget.Toast;
 
  import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionsListUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.Question;
@@ -25,12 +27,16 @@
 
      private QuestionsListViewMvc mViewMvc;
 
+     private QuestionsListViewModel mQuestionsListViewModel;
+
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          getPresentationComponent().inject(this);
 
          mViewMvc = mViewMvcFactory.newInstance(QuestionsListViewMvc.class, null);
+
+         mQuestionsListViewModel = ViewModelProviders.of(this).get(QuestionsListViewModel.class);
 
          setContentView(mViewMvc.getRootView());
 
@@ -42,7 +48,13 @@
          mViewMvc.registerListener(this);
          mFetchQuestionsListUseCase.registerListener(this);
 
-         mFetchQuestionsListUseCase.fetchLastActiveQuestionsAndNotify(NUM_OF_QUESTIONS_TO_FETCH);
+         if (mQuestionsListViewModel.getQuestions().isEmpty()) {
+             mFetchQuestionsListUseCase.fetchLastActiveQuestionsAndNotify(NUM_OF_QUESTIONS_TO_FETCH);
+             Toast.makeText(this, "fetching from use case", Toast.LENGTH_SHORT).show();
+         } else {
+             mViewMvc.bindQuestions(mQuestionsListViewModel.getQuestions());
+             Toast.makeText(this, "from ViewModel", Toast.LENGTH_SHORT).show();
+         }
      }
 
      @Override
@@ -54,6 +66,7 @@
 
      @Override
      public void onFetchOfQuestionsSucceeded(List<Question> questions) {
+         mQuestionsListViewModel.setQuestions(questions);
          mViewMvc.bindQuestions(questions);
      }
 
