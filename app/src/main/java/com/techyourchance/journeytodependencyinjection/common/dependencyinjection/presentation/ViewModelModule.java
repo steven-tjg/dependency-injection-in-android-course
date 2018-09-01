@@ -2,6 +2,8 @@ package com.techyourchance.journeytodependencyinjection.common.dependencyinjecti
 
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
 import com.techyourchance.journeytodependencyinjection.screens.common.viewmodel.ViewModelFactory;
+import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsViewModel;
+import com.techyourchance.journeytodependencyinjection.screens.questionslist.QuestionsListViewModel;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,7 +12,18 @@ import dagger.Provides;
 public class ViewModelModule {
 
     @Provides
-    ViewModelFactory viewModelFactory(FetchQuestionDetailsUseCase fetchQuestionDetailsUseCase) {
-        return new ViewModelFactory(fetchQuestionDetailsUseCase);
+    ViewModelFactory viewModelFactory(QuestionDetailsViewModel questionDetailsViewModel,
+                                      QuestionsListViewModel questionsListViewModel) {
+        return new ViewModelFactory(questionDetailsViewModel, questionsListViewModel);
+    }
+
+    @Provides
+    QuestionDetailsViewModel questionDetailsViewModel(FetchQuestionDetailsUseCase fetchQuestionDetailsUseCase) {
+        return new QuestionDetailsViewModel(fetchQuestionDetailsUseCase);
+    }
+
+    @Provides
+    QuestionsListViewModel questionsListViewModel() {
+        return new QuestionsListViewModel();
     }
 }

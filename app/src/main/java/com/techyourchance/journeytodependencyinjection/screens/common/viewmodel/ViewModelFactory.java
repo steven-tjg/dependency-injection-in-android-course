@@ -10,10 +10,13 @@ import com.techyourchance.journeytodependencyinjection.screens.questionslist.Que
 
 public class ViewModelFactory implements ViewModelProvider.Factory {
 
-    private final FetchQuestionDetailsUseCase mFetchQuestionDetailsUseCase;
+    private final QuestionDetailsViewModel mQuestionDetailsViewModel;
+    private final QuestionsListViewModel mQuestionsListViewModel;
 
-    public ViewModelFactory(FetchQuestionDetailsUseCase fetchQuestionDetailsUseCase) {
-        mFetchQuestionDetailsUseCase = fetchQuestionDetailsUseCase;
+    public ViewModelFactory(QuestionDetailsViewModel questionDetailsViewModel,
+                            QuestionsListViewModel questionsListViewModel) {
+        mQuestionDetailsViewModel = questionDetailsViewModel;
+        mQuestionsListViewModel = questionsListViewModel;
     }
 
     @SuppressWarnings("unchecked")
@@ -22,10 +25,10 @@ public class ViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         ViewModel viewModel;
         if (modelClass == QuestionDetailsViewModel.class) {
-            viewModel = new QuestionDetailsViewModel(mFetchQuestionDetailsUseCase);
+            viewModel = mQuestionDetailsViewModel;
         }
         else if (modelClass == QuestionsListViewModel.class) {
-            viewModel = new QuestionsListViewModel();
+            viewModel = mQuestionsListViewModel;
         }
         else {
             throw new RuntimeException("invalid view model class: " + modelClass);
