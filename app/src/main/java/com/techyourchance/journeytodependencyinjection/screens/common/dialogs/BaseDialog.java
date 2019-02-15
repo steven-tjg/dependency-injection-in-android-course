@@ -1,12 +1,12 @@
 package com.techyourchance.journeytodependencyinjection.screens.common.dialogs;
 
-import android.support.annotation.UiThread;
-import android.support.v4.app.DialogFragment;
-
 import com.techyourchance.journeytodependencyinjection.MyApplication;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationModule;
+
+import androidx.annotation.UiThread;
+import androidx.fragment.app.DialogFragment;
 
 public abstract class BaseDialog extends DialogFragment {
 

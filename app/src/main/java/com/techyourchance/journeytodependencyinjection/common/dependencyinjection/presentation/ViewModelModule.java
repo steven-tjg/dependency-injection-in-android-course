@@ -1,7 +1,5 @@
 package com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation;
 
-import android.arch.lifecycle.ViewModel;
-
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
 import com.techyourchance.journeytodependencyinjection.screens.common.viewmodel.ViewModelFactory;
 import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsViewModel;
@@ -15,6 +13,7 @@ import java.util.Map;
 
 import javax.inject.Provider;
 
+import androidx.lifecycle.ViewModel;
 import dagger.MapKey;
 import dagger.Module;
 import dagger.Provides;

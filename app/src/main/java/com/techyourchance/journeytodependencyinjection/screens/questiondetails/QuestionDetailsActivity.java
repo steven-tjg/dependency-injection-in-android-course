@@ -1,11 +1,9 @@
  package com.techyourchance.journeytodependencyinjection.screens.questiondetails;
 
- import android.arch.lifecycle.ViewModelProviders;
  import android.content.Context;
  import android.content.Intent;
  import android.os.Bundle;
 
- import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
  import com.techyourchance.journeytodependencyinjection.questions.QuestionDetails;
  import com.techyourchance.journeytodependencyinjection.screens.common.activities.BaseActivity;
  import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
@@ -14,6 +12,8 @@
  import com.techyourchance.journeytodependencyinjection.screens.common.viewmodel.ViewModelFactory;
 
  import javax.inject.Inject;
+
+ import androidx.lifecycle.ViewModelProviders;
 
  public class QuestionDetailsActivity extends BaseActivity implements
          QuestionDetailsViewMvc.Listener, QuestionDetailsViewModel.Listener {

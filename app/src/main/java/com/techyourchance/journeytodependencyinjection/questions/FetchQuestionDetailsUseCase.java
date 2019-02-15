@@ -1,12 +1,11 @@
 package com.techyourchance.journeytodependencyinjection.questions;
 
-import android.support.annotation.Nullable;
-
 import com.techyourchance.journeytodependencyinjection.common.BaseObservable;
 import com.techyourchance.journeytodependencyinjection.networking.QuestionSchema;
 import com.techyourchance.journeytodependencyinjection.networking.SingleQuestionResponseSchema;
 import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
 
+import androidx.annotation.Nullable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

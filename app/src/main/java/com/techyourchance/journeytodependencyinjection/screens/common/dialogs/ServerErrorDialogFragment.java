@@ -4,9 +4,10 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 
 import com.techyourchance.journeytodependencyinjection.R;
+
+import androidx.fragment.app.DialogFragment;
 
 public class ServerErrorDialogFragment extends DialogFragment {
 

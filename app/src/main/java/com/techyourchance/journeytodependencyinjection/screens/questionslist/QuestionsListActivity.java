@@ -1,6 +1,5 @@
  package com.techyourchance.journeytodependencyinjection.screens.questionslist;
 
- import android.arch.lifecycle.ViewModelProviders;
  import android.os.Bundle;
  import android.widget.Toast;
 
@@ -16,6 +15,8 @@
  import java.util.List;
 
  import javax.inject.Inject;
+
+ import androidx.lifecycle.ViewModelProviders;
 
  public class QuestionsListActivity extends BaseActivity implements
          QuestionsListViewMvc.Listener, FetchQuestionsListUseCase.Listener {

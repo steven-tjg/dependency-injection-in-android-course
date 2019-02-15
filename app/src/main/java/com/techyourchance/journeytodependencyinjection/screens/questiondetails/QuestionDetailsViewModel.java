@@ -1,12 +1,12 @@
 package com.techyourchance.journeytodependencyinjection.screens.questiondetails;
 
-import android.arch.lifecycle.ViewModel;
-
 import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
 import com.techyourchance.journeytodependencyinjection.questions.QuestionDetails;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import androidx.lifecycle.ViewModel;
 
 public class QuestionDetailsViewModel extends ViewModel implements FetchQuestionDetailsUseCase.Listener {
 

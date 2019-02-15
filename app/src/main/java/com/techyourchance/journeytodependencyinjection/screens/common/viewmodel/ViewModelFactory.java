@@ -1,16 +1,12 @@
 package com.techyourchance.journeytodependencyinjection.screens.common.viewmodel;
 
-import android.arch.lifecycle.ViewModel;
-import android.arch.lifecycle.ViewModelProvider;
-import android.support.annotation.NonNull;
-
-import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDetailsUseCase;
-import com.techyourchance.journeytodependencyinjection.screens.questiondetails.QuestionDetailsViewModel;
-import com.techyourchance.journeytodependencyinjection.screens.questionslist.QuestionsListViewModel;
-
 import java.util.Map;
 
 import javax.inject.Provider;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 
 public class ViewModelFactory implements ViewModelProvider.Factory {

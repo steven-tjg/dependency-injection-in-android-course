@@ -1,11 +1,11 @@
 package com.techyourchance.journeytodependencyinjection.screens.questionslist;
 
-import android.arch.lifecycle.ViewModel;
-
 import com.techyourchance.journeytodependencyinjection.questions.Question;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.lifecycle.ViewModel;
 
 public class QuestionsListViewModel extends ViewModel {
 

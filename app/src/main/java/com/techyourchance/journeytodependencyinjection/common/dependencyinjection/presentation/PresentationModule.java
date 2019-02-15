@@ -2,8 +2,6 @@ package com.techyourchance.journeytodependencyinjection.common.dependencyinjecti
 
 import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 
 import com.techyourchance.journeytodependencyinjection.networking.StackoverflowApi;
@@ -11,6 +9,8 @@ import com.techyourchance.journeytodependencyinjection.questions.FetchQuestionDe
 import com.techyourchance.journeytodependencyinjection.screens.common.ImageLoader;
 import com.techyourchance.journeytodependencyinjection.screens.common.dialogs.DialogsManager;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import dagger.Module;
 import dagger.Provides;
 

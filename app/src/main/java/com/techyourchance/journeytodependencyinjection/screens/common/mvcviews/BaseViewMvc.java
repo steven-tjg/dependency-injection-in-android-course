@@ -1,11 +1,12 @@
 package com.techyourchance.journeytodependencyinjection.screens.common.mvcviews;
 
 import android.content.Context;
-import android.support.annotation.IdRes;
-import android.support.annotation.StringRes;
 import android.view.View;
 
 import com.techyourchance.journeytodependencyinjection.common.BaseObservable;
+
+import androidx.annotation.IdRes;
+import androidx.annotation.StringRes;
 
 /**
  * This is the base class which provides basic common functionality to MVC views implementations
