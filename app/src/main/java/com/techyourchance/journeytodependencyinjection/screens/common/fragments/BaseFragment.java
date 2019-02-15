@@ -1,12 +1,12 @@
 package com.techyourchance.journeytodependencyinjection.screens.common.fragments;
 
-import android.support.annotation.UiThread;
-import android.support.v4.app.Fragment;
-
 import com.techyourchance.journeytodependencyinjection.MyApplication;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationModule;
+
+import androidx.annotation.UiThread;
+import androidx.fragment.app.Fragment;
 
 public abstract class BaseFragment extends Fragment{
 

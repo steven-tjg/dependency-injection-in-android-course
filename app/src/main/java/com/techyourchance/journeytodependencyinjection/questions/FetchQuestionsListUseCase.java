@@ -1,7 +1,5 @@
 package com.techyourchance.journeytodependencyinjection.questions;
 
-import android.support.annotation.Nullable;
-
 import com.techyourchance.journeytodependencyinjection.common.BaseObservable;
 import com.techyourchance.journeytodependencyinjection.networking.QuestionSchema;
 import com.techyourchance.journeytodependencyinjection.networking.QuestionsListResponseSchema;
@@ -11,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import androidx.annotation.Nullable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

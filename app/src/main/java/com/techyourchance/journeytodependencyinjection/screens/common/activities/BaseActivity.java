@@ -1,12 +1,12 @@
 package com.techyourchance.journeytodependencyinjection.screens.common.activities;
 
-import android.support.annotation.UiThread;
-import android.support.v7.app.AppCompatActivity;
-
 import com.techyourchance.journeytodependencyinjection.MyApplication;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.presentation.PresentationModule;
+
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends AppCompatActivity {
 

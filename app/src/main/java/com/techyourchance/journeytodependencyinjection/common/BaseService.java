@@ -1,12 +1,13 @@
 package com.techyourchance.journeytodependencyinjection.common;
 
 import android.app.Service;
-import android.support.annotation.UiThread;
 
 import com.techyourchance.journeytodependencyinjection.MyApplication;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.application.ApplicationComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.service.ServiceComponent;
 import com.techyourchance.journeytodependencyinjection.common.dependencyinjection.service.ServiceModule;
+
+import androidx.annotation.UiThread;
 
 public abstract class BaseService extends Service {
 

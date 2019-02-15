@@ -1,6 +1,5 @@
 package com.techyourchance.journeytodependencyinjection.screens.common.mvcviews;
 
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,6 +10,8 @@ import com.techyourchance.journeytodependencyinjection.screens.questionslist.Que
 import com.techyourchance.journeytodependencyinjection.screens.questionslist.QuestionsListViewMvcImpl;
 
 import javax.inject.Inject;
+
+import androidx.annotation.Nullable;
 
 public class ViewMvcFactory {
 
